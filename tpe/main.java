@@ -1,8 +1,8 @@
 package tpe;
 import java.util.*;
-
+/*LEVANTAR LAS MAQUINAS A UNA ESTRUCTURA LISTA */
 public class main {
-    private static HashMap<String, Integer> maquinas;
+    private static List<Maquina> maquinas;
     private static int piezas;
 
     public static void main(String[] args){
@@ -12,7 +12,8 @@ public class main {
         piezas = lector.obtenerPiezas();
 
         System.out.println("las piezas son: "+piezas);
-        System.out.println("las maquinas son: "+maquinas);
-        System.out.println();
+        for(int i = 0; i<maquinas.size();i++)
+            System.out.println("las maquinas son: "+maquinas.get(i).toString());
+        
     }
 }
