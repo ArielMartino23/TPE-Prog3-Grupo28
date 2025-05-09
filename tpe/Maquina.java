@@ -1,12 +1,13 @@
+package tpe;
 import java.util.*;
 public class Maquina {
     String nombre;
     int cantidadPiezas;
     Pieza piezasATrabajar;
-    public Maquina(String nombre, int cantidadPiezas, Pieza piezasATrabajar) {
+    
+    public Maquina(String nombre, int cantidadPiezas) {
         this.nombre = nombre;
         this.cantidadPiezas = cantidadPiezas;
-        this.piezasATrabajar = piezasATrabajar;
     }
     public String getNombre() {
         return nombre;

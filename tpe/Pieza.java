@@ -1,3 +1,4 @@
+package tpe;
 import java.util.*;
 public class Pieza {
     int numeroPiezas;

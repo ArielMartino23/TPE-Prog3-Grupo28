@@ -1,3 +1,4 @@
+package tpe;
 import java.util.*;
 
 public class GrafoDirigido<T> implements Grafo<T> {
