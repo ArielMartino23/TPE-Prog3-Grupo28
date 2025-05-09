@@ -30,7 +30,7 @@ public class CSVReader {
 //			
 //		}
 		
-	public void readMachines(String processorMachine, HashMap<String, Maquina> machineMap) {
+	public void readMachines(String processorMachine, HashMap<String, Integer> machineMap) {
 			
 			// Obtengo una lista con las lineas del archivo
 			// lines.get(0) tiene la primer linea del archivo
@@ -44,9 +44,9 @@ public class CSVReader {
                 int cantidadPiezas = Integer.parseInt(line[1].trim());
 				
 				
-			    Maquina machine = new Maquina(nombre, cantidadPiezas);
+			    //Maquina machine = new Maquina(nombre, cantidadPiezas);
 		        // Guardar la tarea en el HashMap usando el id como clave
-			    machineMap.put(nombre, machine);			
+			    machineMap.put(nombre, cantidadPiezas);			
             }
 		}
 

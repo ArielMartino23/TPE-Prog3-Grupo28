@@ -3,7 +3,7 @@ import java.util.*;
 
 import tpe.utils.CSVReader;
 public class Lector {
-    private HashMap<String, Maquina> maquinas;
+    private HashMap<String, Integer> maquinas;
     private int piezas;
 
     public Lector(String pathEstructura){
@@ -15,8 +15,8 @@ public class Lector {
         /* despues metemos algoritmos */
     }
 
-    public HashMap<String, Maquina> obtenerMaquinas(){
-        HashMap<String, Maquina> retorno = new HashMap<>();
+    public HashMap<String, Integer> obtenerMaquinas(){
+        HashMap<String, Integer> retorno = new HashMap<>();
             retorno.putAll(maquinas);
 
         return retorno;
