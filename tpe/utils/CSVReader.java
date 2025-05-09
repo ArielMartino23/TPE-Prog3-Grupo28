@@ -4,32 +4,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-import tpe.Maquina;
-import tpe.Pieza;
 public class CSVReader {
 
 		public CSVReader() {
 		}
-		
-//		public void readTasks(String taskPath) {
-//			
-//			// Obtengo una lista con las lineas del archivo
-//			// lines.get(0) tiene la primer linea del archivo
-//			// lines.get(1) tiene la segunda linea del archivo... y así
-//			ArrayList<String[]> lines = this.readContent(taskPath);
-//			
-//			for (String[] line: lines) {
-//				// Cada linea es un arreglo de Strings, donde cada posicion guarda un elemento
-//				String id = line[0].trim();
-//				String nombre = line[1].trim();
-//				Integer tiempo = Integer.parseInt(line[2].trim());
-//				Boolean critica = Boolean.parseBoolean(line[3].trim());
-//				Integer prioridad = Integer.parseInt(line[4].trim());
-//				// Aca instanciar lo que necesiten en base a los datos leidos
-//			}
-//			
-//		}
-		
+
 	public void readMachines(String processorMachine, HashMap<String, Integer> machineMap) {
 			
 			// Obtengo una lista con las lineas del archivo

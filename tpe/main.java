@@ -1,5 +1,4 @@
 package tpe;
-import java.io.File;
 import java.util.*;
 
 public class main {

@@ -1,5 +1,4 @@
 package tpe;
-import java.util.*;
 public class Maquina {
     String nombre;
     int cantidadPiezas;
