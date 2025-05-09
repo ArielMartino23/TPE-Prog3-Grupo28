@@ -1,9 +1,8 @@
 package tpe;
-import java.util.*;
 public class Maquina {
     String nombre;
     int cantidadPiezas;
-    Pieza piezasATrabajar;
+    
     
     public Maquina(String nombre, int cantidadPiezas) {
         this.nombre = nombre;
@@ -21,12 +20,10 @@ public class Maquina {
     public void setCantidadPiezas(int cantidadPiezas) {
         this.cantidadPiezas = cantidadPiezas;
     }
-    public Pieza getPiezasATrabajar() {
-        return piezasATrabajar;
-    }
-    public void setPiezasATrabajar(Pieza piezasATrabajar) {
-        this.piezasATrabajar = piezasATrabajar;
-    }
 
+    @Override
+    public String toString() {
+        return "Maquina [nombre=" + nombre + ", cantidadPiezas=" + cantidadPiezas + "]";
+    }
 
 }   
