@@ -14,4 +14,15 @@ public class Lector {
         reader.readMachines(pathEstructura, this.maquinas);
         /* despues metemos algoritmos */
     }
+
+    public HashMap<String, Maquina> obtenerMaquinas(){
+        HashMap<String, Maquina> retorno = new HashMap<>();
+            retorno.putAll(maquinas);
+
+        return retorno;
+    }
+
+    public int obtenerPiezas(){
+        return this.piezas;
+    }
 }
