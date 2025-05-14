@@ -15,5 +15,9 @@ public class main {
         for(int i = 0; i<maquinas.size();i++)
             System.out.println("las maquinas son: "+maquinas.get(i).toString());
         
+
+        Backtracking backtrakeo = new Backtracking(maquinas, piezas);
+        //List<Maquina> combinacion = backtrakeo.buscarCombinacion();
+        System.out.println(backtrakeo.getSiza());
     }
 }
