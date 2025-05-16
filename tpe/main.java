@@ -6,7 +6,7 @@ public class main {
     private static int piezas;
 
     public static void main(String[] args){
-        Lector lector = new Lector("tpe/datasets/estructura.csv");
+        Lector lector = new Lector("datasets/estructura.csv");
 
         maquinas = lector.obtenerMaquinas();
         piezas = lector.obtenerPiezas();
