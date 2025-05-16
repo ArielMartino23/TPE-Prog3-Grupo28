@@ -11,13 +11,13 @@ public class main {
         maquinas = lector.obtenerMaquinas();
         piezas = lector.obtenerPiezas();
 
-        System.out.println("las piezas son: "+piezas);
-        for(int i = 0; i<maquinas.size();i++)
-            System.out.println("las maquinas son: "+maquinas.get(i).toString());
-        
+        System.out.println(" Piezas a producir: " + piezas);
+        System.out.println(" Máquinas disponibles:");
+        for (Maquina m : maquinas)
+            System.out.println(m);
 
-        Backtracking backtrakeo = new Backtracking(maquinas, piezas);
-        //List<Maquina> combinacion = backtrakeo.buscarCombinacion();
-        System.out.println(backtrakeo.getSiza());
+        Backtracking backtracking = new Backtracking(maquinas, piezas);
+        backtracking.buscarCombinacion();
+        backtracking.mostrarResultado();
     }
 }
