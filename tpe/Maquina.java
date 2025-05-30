@@ -1,5 +1,6 @@
 package tpe;
-public class Maquina {
+
+public class Maquina{
     String nombre;
     int cantidadPiezas;
     

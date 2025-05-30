@@ -19,5 +19,9 @@ public class main {
         Backtracking backtracking = new Backtracking(maquinas, piezas);
         backtracking.buscarCombinacion();
         backtracking.mostrarResultado();
+
+        Greedy greedy = new Greedy(maquinas, piezas, new ArrayList<>() ,0);
+        greedy.aplicarGreedy();
+        greedy.mostrarResultado();
     }
 }
