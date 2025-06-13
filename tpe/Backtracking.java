@@ -26,11 +26,11 @@ public class Backtracking {
     }
 
     public List<Maquina> buscarCombinacion(){
-        backtrack(new ArrayList<>(), 0);
+        backtrack(maquinas,new ArrayList<>(), 0, 0); 
         return mejorCombinacion;
     }
 
-    private void backtrack(List<Maquina> seleccionadas, int piezasActuales){
+    private void backtrack(List<Maquina> disponibles, List<Maquina> seleccionadas, int piezasActuales, int start){
         estadosGenerados++;
 
         if (piezasActuales == cantPiezas) {
@@ -44,10 +44,11 @@ public class Backtracking {
         if (piezasActuales > cantPiezas || seleccionadas.size() >= mejorCantidadMaquinas) {
             return;
         }
-
-        for (Maquina maquina : maquinas) {
+        
+        for(int i = start; i < disponibles.size(); i++){
+            Maquina maquina = disponibles.get(i);
             seleccionadas.add(maquina);
-            backtrack(seleccionadas, piezasActuales + maquina.getCantidadPiezas());
+            backtrack(disponibles, seleccionadas, piezasActuales+maquina.getCantidadPiezas(), i);
             seleccionadas.remove(seleccionadas.size() - 1);
         }
     }

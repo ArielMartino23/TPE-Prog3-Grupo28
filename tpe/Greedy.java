@@ -32,14 +32,18 @@ public class Greedy {
         List<Maquina> maquinasOrdenadas = ordenPorPiezas(seleccionadas);
 
         
-        while(!maquinasOrdenadas.isEmpty()){
+        while(!maquinasOrdenadas.isEmpty() || cantPiezas > 0 ){
             estadosGenerados++;
             Maquina x1 = maquinasOrdenadas.get(0);
             maquinasOrdenadas.remove(x1);
             
             if(factible(candidatos,x1,cantPiezas)){
-                cantPiezas = cantPiezas - x1.getCantidadPiezas();
-                candidatos.add(x1);
+                //hacer calculo de cuantas veces se puede poner en funcionamiento esa maquina
+                int total = cantPiezas / x1.getCantidadPiezas();
+                cantPiezas = cantPiezas - (x1.getCantidadPiezas() * total);
+                for(int i = 0; i < total; i++){
+                    candidatos.add(x1);
+                }
             }
         }
         if(candidatos.isEmpty()){
