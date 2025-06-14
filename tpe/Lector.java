@@ -2,6 +2,11 @@ package tpe;
 import java.util.*;
 
 import tpe.utils.CSVReader;
+
+/*
+*Esta clase se encarga de leer el archivo CSV y de esta forma se crean y se guardan las maquinas y las piezas que
+* vamos a trabajar
+ */
 public class Lector {
     private List<Maquina> maquinas;
     private int piezas;
@@ -12,7 +17,6 @@ public class Lector {
 
         this.piezas =  reader.readPieces(pathEstructura);
         reader.readMachines(pathEstructura, this.maquinas);
-        /* despues metemos algoritmos */
     }
 
     public List<Maquina> obtenerMaquinas(){

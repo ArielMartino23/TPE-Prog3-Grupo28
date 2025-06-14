@@ -12,14 +12,8 @@ public class Maquina{
     public String getNombre() {
         return nombre;
     }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
     public int getCantidadPiezas() {
         return cantidadPiezas;
-    }
-    public void setCantidadPiezas(int cantidadPiezas) {
-        this.cantidadPiezas = cantidadPiezas;
     }
 
     @Override

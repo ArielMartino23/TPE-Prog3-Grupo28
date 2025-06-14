@@ -33,19 +33,19 @@ public class Backtracking {
     private void backtrack(List<Maquina> disponibles, List<Maquina> seleccionadas, int piezasActuales, int start){
         estadosGenerados++;
 
-        if (piezasActuales == cantPiezas) {
-            if (seleccionadas.size() < mejorCantidadMaquinas) {
+        if (piezasActuales == cantPiezas) { //Condicion corte: Si la cantidad de piezas trabajadas actuales de las maquinas es igual a la cantidad de piezas a ser trabajadas
+            if (seleccionadas.size() < mejorCantidadMaquinas) { //Condicion para obtener la minima cantidad de maquinas encendidas
                 mejorCantidadMaquinas = seleccionadas.size();
                 mejorCombinacion = new ArrayList<>(seleccionadas);
             }
             return;
         }
 
-        if (piezasActuales > cantPiezas || seleccionadas.size() >= mejorCantidadMaquinas) {
+        if (piezasActuales > cantPiezas || seleccionadas.size() >= mejorCantidadMaquinas) { // Condicion de poda: si la maquina actual produce una mayor cantidad de piezas que las que tienen que ser trabajadas o si estamos obteniendo una mayor cantidad de maquinas puestas en marcha que la actual no sigue
             return;
         }
         
-        for(int i = start; i < disponibles.size(); i++){
+        for(int i = start; i < disponibles.size(); i++){ // Este For evita la repeticion de maquinas puestas en marcha reduciendo la cantidad de estados generados (arbol de exploracion)
             Maquina maquina = disponibles.get(i);
             seleccionadas.add(maquina);
             backtrack(disponibles, seleccionadas, piezasActuales+maquina.getCantidadPiezas(), i);

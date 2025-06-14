@@ -4,11 +4,18 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+
+/*
+ * Estrategia de resolucion:
+ * - Los candidatos es el conjunto de maquinas
+ * - Las maquinas son ordenadas de mayor a menor teniendo en cuenta la cantidad de piezas que producen.
+ * - Puede no llegar a trabajar el total de piezas dependiendo de la configuracion de maquinas elegida.
+ * - etc.>>
+ */
 public class Greedy {
     private List<Maquina> maquinas;
     private int cantPiezas;
     private List<Maquina> mejorCombinacion;
-    //private int mejorCantidadMaquinas;
     private int estadosGenerados;
 
     public Greedy(List<Maquina> maquinas, int cantPiezas, List<Maquina> mejorCombinacion,
@@ -16,7 +23,6 @@ public class Greedy {
         this.maquinas = maquinas;
         this.cantPiezas = cantPiezas;
         this.mejorCombinacion = mejorCombinacion;
-        //this.mejorCantidadMaquinas = mejorCantidadMaquinas;
         this.estadosGenerados = estadosGenerados;
     }
 
@@ -27,39 +33,40 @@ public class Greedy {
 
     private List<Maquina> greedy(List<Maquina> seleccionadas, int cantPiezas){
         
-        List<Maquina> candidatos = new ArrayList<>();
+        List<Maquina> candidatos = new ArrayList<>();// Conjunto solucion inicialmente vacio
 
-        List<Maquina> maquinasOrdenadas = ordenPorPiezas(seleccionadas);
+        List<Maquina> maquinasOrdenadas = ordenPorPiezas(seleccionadas);// Lista de maquinas ordenadas de mayor a menor por cantidad de piezas que producen
 
         
-        while(!maquinasOrdenadas.isEmpty() || cantPiezas > 0 ){
+        while(!maquinasOrdenadas.isEmpty() || cantPiezas > 0 ){ // Mientas hayan candidatos o hayan piezas por producir...
             estadosGenerados++;
             Maquina x1 = maquinasOrdenadas.get(0);
             maquinasOrdenadas.remove(x1);
             
-            if(factible(candidatos,x1,cantPiezas)){
-                //hacer calculo de cuantas veces se puede poner en funcionamiento esa maquina
+            if(factible(x1,cantPiezas)){ // Agarrando un candidato vemos si es factible o no
+                //La factibilidad seria la cantidad de piezas que trabaja el candidato es menor o igual a la actual
                 int total = cantPiezas / x1.getCantidadPiezas();
                 cantPiezas = cantPiezas - (x1.getCantidadPiezas() * total);
-                for(int i = 0; i < total; i++){
+                //hace el calculo de cuantas veces se puede poner en funcionamiento ese candidato
+                for(int i = 0; i < total; i++){ //Se agrega a la lista de candidatos solucion x cantidad de veces el candidato actual
                     candidatos.add(x1);
                 }
             }
         }
-        if(candidatos.isEmpty()){
+        if(candidatos.isEmpty()){ // Si no se pudo agregar ningun cadidato retornamos null
                 return null;
-            }else{
+            }else{ // Si la lista tiene al menos uno la devolvemos
                 return candidatos;
         }
     }
 
-    private boolean factible(List<Maquina> seleccionadas, Maquina x,int cantPiezas){
+    private boolean factible( Maquina x,int cantPiezas){ //Compara la cantidad de piezas que produce el candidato con la actual. Si es menor retorna true, sino, false.
         if(x.getCantidadPiezas() <= cantPiezas){
             return true;
         }
         return false;
     }
-    private List<Maquina> ordenPorPiezas(List<Maquina> seleccionadas) {
+    private List<Maquina> ordenPorPiezas(List<Maquina> seleccionadas) { // Ordenamos de mayor a menor las maquinas por la cantidad de piezas que producen
         seleccionadas.sort(Comparator.comparingInt(Maquina::getCantidadPiezas).reversed());
     return seleccionadas;
     }

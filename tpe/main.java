@@ -1,6 +1,5 @@
 package tpe;
 import java.util.*;
-/*LEVANTAR LAS MAQUINAS A UNA ESTRUCTURA LISTA */
 public class main {
     private static List<Maquina> maquinas;
     private static int piezas;
