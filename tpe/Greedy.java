@@ -1,8 +1,6 @@
 package tpe;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 
 /*
@@ -15,10 +13,10 @@ import java.util.List;
 public class Greedy {
     private List<Maquina> maquinas;
     private int cantPiezas;
-    private List<Maquina> mejorCombinacion;
+    private Map<Maquina, Integer> mejorCombinacion;
     private int estadosGenerados;
 
-    public Greedy(List<Maquina> maquinas, int cantPiezas, List<Maquina> mejorCombinacion,
+    public Greedy(List<Maquina> maquinas, int cantPiezas, Map<Maquina, Integer> mejorCombinacion,
             int estadosGenerados) {
         this.maquinas = maquinas;
         this.cantPiezas = cantPiezas;
@@ -26,21 +24,24 @@ public class Greedy {
         this.estadosGenerados = estadosGenerados;
     }
 
-    public List<Maquina> aplicarGreedy(){
+    public Map<Maquina, Integer> aplicarGreedy(){
         mejorCombinacion = greedy(maquinas, cantPiezas);
         return mejorCombinacion;
     }
 
-    private List<Maquina> greedy(List<Maquina> seleccionadas, int cantPiezas){
-        
-        List<Maquina> candidatos = new ArrayList<>();// Conjunto solucion inicialmente vacio
+    private Map<Maquina, Integer> greedy(List<Maquina> seleccionadas, int cantPiezas){
+
+        Map<Maquina, Integer> candidatos = new HashMap<>();// Conjunto solucion inicialmente vacio
 
         List<Maquina> maquinasOrdenadas = ordenPorPiezas(seleccionadas);// Lista de maquinas ordenadas de mayor a menor por cantidad de piezas que producen
 
         
-        while(!maquinasOrdenadas.isEmpty() || cantPiezas > 0 ){ // Mientas hayan candidatos o hayan piezas por producir...
+
+        while(!maquinasOrdenadas.isEmpty() && cantPiezas > 0 ){ // Mientas hayan candidatos o hayan piezas por producir...
             estadosGenerados++;
+
             Maquina x1 = maquinasOrdenadas.get(0);
+
             maquinasOrdenadas.remove(x1);
             
             if(factible(x1,cantPiezas)){ // Agarrando un candidato vemos si es factible o no
@@ -48,16 +49,17 @@ public class Greedy {
                 int total = cantPiezas / x1.getCantidadPiezas();
                 cantPiezas = cantPiezas - (x1.getCantidadPiezas() * total);
                 //hace el calculo de cuantas veces se puede poner en funcionamiento ese candidato
-                for(int i = 0; i < total; i++){ //Se agrega a la lista de candidatos solucion x cantidad de veces el candidato actual
-                    candidatos.add(x1);
-                }
+                candidatos.put(x1, total);
             }
+
         }
-        if(candidatos.isEmpty()){ // Si no se pudo agregar ningun cadidato retornamos null
+        if(cantPiezas > 0){
+               // Si no se pudo agregar ningun cadidato o no se llego a producir la cantidad total de piezas retornamos null
                 return null;
             }else{ // Si la lista tiene al menos uno la devolvemos
                 return candidatos;
         }
+
     }
 
     private boolean factible( Maquina x,int cantPiezas){ //Compara la cantidad de piezas que produce el candidato con la actual. Si es menor retorna true, sino, false.
@@ -72,21 +74,27 @@ public class Greedy {
     }
 
     public void mostrarResultado() {
+        int piezasTotales = 0;
         System.out.println("Greedy");
-        if (mejorCombinacion.isEmpty()) {
+        if (mejorCombinacion == null) {
             System.out.println("No se encontró una combinación posible.");
             return;
         }
 
         System.out.print("Solución obtenida (secuencia de máquinas): ");
-        for (Maquina m : mejorCombinacion) {
-            System.out.print(m.getNombre() + " ");
+        for (Map.Entry<Maquina, Integer> entry : mejorCombinacion.entrySet()) {
+            Maquina m = entry.getKey();
+            int veces = entry.getValue();
+            for (int i = 0; i < veces; i++) {
+                System.out.print(m.getNombre() + " ");
+            }
+
+            piezasTotales += m.getCantidadPiezas() * veces;
         }
         System.out.println();
 
-        int piezasTotales = mejorCombinacion.stream().mapToInt(Maquina::getCantidadPiezas).sum();
         System.out.println("Cantidad de piezas producidas: " + piezasTotales);
-        System.out.println("Cantidad de puestas en funcionamiento: " + mejorCombinacion.size());
+        System.out.println("Cantidad de puestas en funcionamiento: " + mejorCombinacion.values().stream().mapToInt(Integer::intValue).sum());
         System.out.println("Estados generados (nodos explorados): " + estadosGenerados);
     }
 }

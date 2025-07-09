@@ -19,7 +19,7 @@ public class main {
         backtracking.buscarCombinacion();
         backtracking.mostrarResultado();
 
-        Greedy greedy = new Greedy(maquinas, piezas, new ArrayList<>() ,0);
+        Greedy greedy = new Greedy(maquinas, piezas, new HashMap<>() ,0);
         greedy.aplicarGreedy();
         greedy.mostrarResultado();
     }

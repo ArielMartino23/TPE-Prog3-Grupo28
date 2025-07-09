@@ -21,4 +21,5 @@ public class Maquina{
         return "Maquina [nombre=" + nombre + ", cantidadPiezas=" + cantidadPiezas + "]";
     }
 
-}   
+
+}
